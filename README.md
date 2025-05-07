@@ -17,7 +17,11 @@ pip install pretty-print-directory
 
 ## 2. Usage
 
-### As a library
+### Basic usage
+
+This package is largely used through the `print_directory` function, which takes a path and prints the
+contents of that directory in a tree-like format. It will print the contents of the directory and all
+subdirectories.
 
 ```python
 >>> from pretty_print_directory import print_directory
@@ -38,26 +42,70 @@ pip install pretty-print-directory
 ```
 
 You can change the print characters by passing a different `config` object to the `print_directory` function.
-This object is a `PrintConfig` dataclass that has fields: `space`, `branch`, `last`, and `tee`.
+This object is a `PrintConfig` dataclass:
 
 ```python
 >>> from pretty_print_directory import PrintConfig
->>> config = PrintConfig(tee="+-- ")
->>> config
-PrintConfig(space='    ', branch='│   ', tee='+-- ', last='└── ')
+>>> import inspect
+>>> print(inspect.getsource(PrintConfig)) # doctest: +NORMALIZE_WHITESPACE
+@dataclass
+class PrintConfig:
+    ...
+    space: str = SPACE
+    branch: str = BRANCH
+    tee: str = TEE
+    last: str = LAST
+    file_extension: list[str] | None = None
+    ...
+
+```
+
+#### Controlling what files are shown:
+
+You can control what files are shown via the `file_extension` parameter of the `PrintConfig` object.
+
+````python
 >>> with tempfile.TemporaryDirectory() as tmpdir:
 ...     path = Path(tmpdir)
 ...     (path / "file1.txt").touch()
 ...     (path / "foo").mkdir()
 ...     (path / "bar").mkdir()
 ...     (path / "bar" / "baz.csv").touch()
-...     print_directory(path, config=config)
+...     print_directory(path, config=PrintConfig(file_extension=".csv"))
+└── bar
+    └── baz.csv
+>>> with tempfile.TemporaryDirectory() as tmpdir:
+...     path = Path(tmpdir)
+...     (path / "file1.txt").touch()
+...     (path / "foo").mkdir()
+...     (path / "bar").mkdir()
+...     (path / "bar" / "baz.csv").touch()
+...     print_directory(path, config=PrintConfig(file_extension=[".csv", ".txt"]))
+├── bar
+│   └── baz.csv
+└── file1.txt
+
+#### Customizing the print style:
+
+You can customize the print style with the `space`, `branch`, `tee`, and `last` parameters of the
+`PrintConfig` object.
+
+```python
+>>> with tempfile.TemporaryDirectory() as tmpdir:
+...     path = Path(tmpdir)
+...     (path / "file1.txt").touch()
+...     (path / "foo").mkdir()
+...     (path / "bar").mkdir()
+...     (path / "bar" / "baz.csv").touch()
+...     print_directory(path, config=PrintConfig(tee="+-- "))
 +-- bar
 │   └── baz.csv
 +-- file1.txt
 └── foo
 
-```
+````
+
+#### Customizing the print function:
 
 You can also pass more keyword arguments to this function which will be passed to the underlying print call.
 
