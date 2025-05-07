@@ -1,7 +1,7 @@
 # `pretty_print_directory`: A Simple Utility to Pretty-Print Directory Contents
 
 [![PyPI - Version](https://img.shields.io/pypi/v/pretty-print-directory)](https://pypi.org/project/pretty-print-directory/)
-![python](https://img.shields.io/badge/-Python_3.12-blue?logo=python&logoColor=white)
+![python](https://img.shields.io/badge/-Python_>3.10-blue?logo=python&logoColor=white)
 [![codecov](https://codecov.io/gh/mmcdermott/pretty-print-directory/graph/badge.svg?token=5RORKQOZF9)](https://codecov.io/gh/mmcdermott/pretty-print-directory)
 [![tests](https://github.com/mmcdermott/pretty-print-directory/actions/workflows/tests.yaml/badge.svg)](https://github.com/mmcdermott/pretty-print-directory/actions/workflows/tests.yml)
 [![code-quality](https://github.com/mmcdermott/pretty-print-directory/actions/workflows/code-quality-main.yaml/badge.svg)](https://github.com/mmcdermott/pretty-print-directory/actions/workflows/code-quality-main.yaml)
