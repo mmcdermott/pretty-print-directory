@@ -1,5 +1,3 @@
-"""Core utilities for MEDS pipelines built with these tools."""
-
 from dataclasses import dataclass
 from pathlib import Path
 
