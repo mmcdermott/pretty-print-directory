@@ -64,7 +64,7 @@ class PrintConfig:
 
 You can control what files are shown via the `file_extension` parameter of the `PrintConfig` object.
 
-````python
+```python
 >>> with tempfile.TemporaryDirectory() as tmpdir:
 ...     path = Path(tmpdir)
 ...     (path / "file1.txt").touch()
@@ -85,6 +85,8 @@ You can control what files are shown via the `file_extension` parameter of the `
 │   └── baz.csv
 └── file1.txt
 
+```
+
 #### Customizing the print style:
 
 You can customize the print style with the `space`, `branch`, `tee`, and `last` parameters of the
@@ -103,7 +105,7 @@ You can customize the print style with the `space`, `branch`, `tee`, and `last` 
 +-- file1.txt
 └── foo
 
-````
+```
 
 #### Customizing the print function:
 
