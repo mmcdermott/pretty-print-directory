@@ -87,6 +87,21 @@ You can control what files are shown via the `file_extension` parameter of the `
 
 ```
 
+... or the `ignore_regex` parameter, which takes a regular expression to match file or directory names against
+(matching paths and any children of matching paths are not printed):
+
+```python
+>>> with tempfile.TemporaryDirectory() as tmpdir:
+...     path = Path(tmpdir)
+...     (path / "file1.txt").touch()
+...     (path / "bor.py").mkdir()
+...     (path / "bar").mkdir()
+...     (path / "bar" / "baz.csv").touch()
+...     print_directory(path, config=PrintConfig(ignore_regex=r"b.r"))
+└── file1.txt
+
+```
+
 #### Customizing the print style:
 
 You can customize the print style with the `space`, `branch`, `tee`, and `last` parameters of the
