@@ -16,13 +16,23 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = ["pytest"]
+dependencies = ["pytest>=7"]
 
 [tool.setuptools_scm]
 
+[dependency-groups]
+dev = [
+  "pre-commit==4.6.0",
+  "ruff==0.15.11",
+  "pytest-cov==7.1.0",
+  # shfmt-py provides the `shfmt` binary used by `mdformat-shfmt`. Pinned here
+  # so `uv run pre-commit run` has shfmt available in the venv and does not
+  # silently fall back to whatever is (or isn't) on PATH.
+  "shfmt-py==3.12.0.2",
+]
+
 [project.optional-dependencies]
-dev = ["pre-commit<4", "ruff"]
-tests = ["pytest-cov"]
+tests = ["pytest-cov==7.1.0"]
 
 [project.urls]
 Homepage = "https://github.com/mmcdermott/pretty-print-directory"
