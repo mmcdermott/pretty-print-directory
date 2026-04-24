@@ -32,14 +32,14 @@ jobs:
 
       - name: Find modified files
         id: file_changes
-        uses: trilom/file-changes-action@v1.2.4
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
-          output: " "
+          separator: " "
 
       - name: List modified files
-        run: echo '${{ steps.file_changes.outputs.files}}'
+        run: echo '${{ steps.file_changes.outputs.all_changed_files }}'
 
       - name: Run pre-commits
         uses: pre-commit/action@v3.0.1
         with:
-          extra_args: --files ${{ steps.file_changes.outputs.files}}
+          extra_args: --files ${{ steps.file_changes.outputs.all_changed_files }}
